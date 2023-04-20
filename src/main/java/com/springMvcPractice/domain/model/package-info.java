@@ -1,0 +1,1 @@
+package com.springMvcPractice.domain.model;

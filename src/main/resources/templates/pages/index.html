@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<h2 th:text="${#hello.helloTextOfConfig}">計算ドリルクリエーター</h2>
+<p>作成したいドリルの数を入力してください</p>
+<form method="get" action="/">
+    <input type="text" name="plusCnt"/>
+    <input type="text" name="minusCnt"/>
+    <input type="submit"/>
+</form>
+<div th:each="drill:${drillList}">
+    <table>
+        <tr>
+            <th th:id="operand+${drillStat.count}" th:text="${drill.getOperand()}"
+                th:value="${drill.getOperand()}"></th>
+            <!-- Statはth:eachのデフォルトステータス変数-->
+            <td><input type="text" th:id="answerInput+${drillStat.count}"/>
+            </td>
+            <td><input type="submit" value="計算結果" th:onclick="|answerRequest('__${drillStat.count}__')|"/>
+            </td>
+            <td><label th:id="judge+${drillStat.count}"></label></td>
+        </tr>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- 意外とハマる th:srcで読み込み場合はresources配下に必ずstatic/jsなどでディレクトリを用意する　cssの場合はstatic/cssのようにする-->
+<script th:src="@{/js/app.js}" type="text/javascript"></script>
+</body>
+
+</html>
