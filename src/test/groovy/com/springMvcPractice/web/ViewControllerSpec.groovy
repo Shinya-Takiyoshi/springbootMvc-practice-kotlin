@@ -11,6 +11,6 @@ class ViewControllerSpec extends Specification {
         Model model = Mock(Model)
         model.addAttribute("test", "こんにちは")
         expect:
-        viewController.index(model) == "こんにちは"
+        viewController.index(1,1,model) == "pages/index"
     }
 }
