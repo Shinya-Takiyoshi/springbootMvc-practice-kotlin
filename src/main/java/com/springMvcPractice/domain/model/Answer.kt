@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor
 
 @RequiredArgsConstructor
 @Getter
-class Answer(drill: Drill, calcResult: Int) {
-    private val drill: Drill? = drill
-    private val calcResult: Int? = calcResult
-    private var judge: Boolean? = null
+class Answer(val drill: Drill, val calcResult: Int) {
+    var judge: Boolean = false
     fun setJudge() {
         judge = calcResult == drill!!.answerInput
     }

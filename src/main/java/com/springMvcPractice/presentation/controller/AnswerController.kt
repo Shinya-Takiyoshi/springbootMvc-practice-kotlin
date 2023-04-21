@@ -11,11 +11,11 @@ class AnswerController {
     fun answer(@ModelAttribute answer: Answer): Answer {
         //kotlinのdata classを扱う場合privateから呼べないため呼べない。
         //対策：kotlinファイルに統一するかデータクラスをやめるか
-        //println("問題:" + answer.drill.operand)
-        //println("回答:" + answer.drill.answerInput)
-        //println("答え:" + answer.calcResult)
+        println("問題:" + answer.drill.operand)
+        println("回答:" + answer.drill.answerInput)
+        println("答え:" + answer.calcResult)
         answer.setJudge()
-        //println("検証結果:" + answer.judge)
+        println("検証結果:" + answer.judge)
         return answer
     }
 }
