@@ -68,6 +68,14 @@
             <version>2.3-groovy-4.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- kotlin-->
+        <dependency>
+            <groupId>org.jetbrains.kotlin.jvm</groupId>
+            <artifactId>org.jetbrains.kotlin.jvm.gradle.plugin</artifactId>
+            <version>1.8.20</version>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>

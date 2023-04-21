@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute
 @ControllerAdvice(assignableTypes = [AnswerController::class])
 class AnswerControllerAdvice {
     @ModelAttribute("answer")
-    fun addDrill(@AnswerFilter drill: Drill?): Answer {
+    fun addDrill(@AnswerFilter drill: Drill): Answer {
         val answerService = AnswerService()
         return answerService.calcResult(drill)
     }
