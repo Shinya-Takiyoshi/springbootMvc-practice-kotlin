@@ -1,13 +1,14 @@
-package com.springMvcPractice.domain.model;
+package com.springMvcPractice.domain.model
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+enum class Operator {
+    PLUS {
+        override val operator: String
+            get() = "+"
+    },
+    MINUS {
+        override val operator: String
+            get() = "-"
+    };
 
-@RequiredArgsConstructor
-@Getter
-public enum Operator {
-    PLUS("+"),
-    MINUS("-");
-
-    private final String operator;
+    abstract val operator: String
 }

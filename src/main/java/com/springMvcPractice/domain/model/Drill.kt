@@ -1,16 +1,10 @@
-package com.springMvcPractice.domain.model;
+package com.springMvcPractice.domain.model
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter
+import lombok.NonNull
 
 /**
  * ドリルのモデリングクラス
- **/
-@RequiredArgsConstructor
-@AllArgsConstructor
+ */
 @Getter
-public class Drill {
-    private final String operand;
-    private Integer answerInput;
-}
+data class Drill(@NonNull val operand: String, val answerInput: Int = 0)

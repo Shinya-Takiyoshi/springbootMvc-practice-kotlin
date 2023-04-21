@@ -2,8 +2,9 @@ package com.springMvcPractice.domain.mapper;
 
 import com.springMvcPractice.domain.model.Emplist;
 import com.springMvcPractice.domain.model.EmplistExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface EmplistMapper {
     /**

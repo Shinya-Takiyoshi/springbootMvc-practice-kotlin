@@ -1,83 +1,78 @@
-package com.springMvcPractice.application.service;
+package com.springMvcPractice.application.service
 
-import com.springMvcPractice.domain.model.Drill;
+import com.springMvcPractice.domain.model.Drill
+import java.util.*
+import java.util.stream.Collectors
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class CreateDrillService {
-    public static final int MAX_DRILL_SIZE = 100;
-    public static final int MIN_DRILL_SIZE = 0;
-
-    public List<Drill> execute(final int plusCnt, final int minusCnt) {
+class CreateDrillService {
+    fun execute(plusCnt: Int, minusCnt: Int): List<Drill?> {
         //プラスのリスト作成
-        List<Drill> plusDrillList = createPlusList(plusCnt);
+        val plusDrillList = createPlusList(plusCnt)
         //マイナスのリスト作成
-        List<Drill> minusDrillList = createMinusList(minusCnt);
+        val minusDrillList = createMinusList(minusCnt)
 
         //生成した数が要求された数を満たしている場合
         //プラスとマイナスをマージ
         //plusSetAllを全体のリストとする。
         //追加する場合は plusDrillList.addAll(*DrillList);
-        plusDrillList.addAll(minusDrillList);
+        plusDrillList.addAll(minusDrillList)
 
         //リストをシャッフルする
-        Collections.shuffle(plusDrillList);
-
-        return plusDrillList;
+        Collections.shuffle(plusDrillList)
+        return plusDrillList
     }
 
-    public List<Drill> createPlusList(int plusCnt) {
+    fun createPlusList(plusCnt: Int): MutableList<Drill?> {
         if (plusCnt <= 0) {
-            return Collections.EMPTY_LIST;
+            return mutableListOf()
         }
         //--createPlusList() start
-        HashSet<Drill> plusSetAll = new HashSet<>();
+        val plusSetAll = HashSet<Drill?>()
         //乱数生成
-        Random r = new Random();
-        DrillService plusDrillService = new PlusDrillService();
+        val r = Random()
+        val plusDrillService: DrillService = PlusDrillService()
         do {
             //重複しないプラスリストの生成
-            HashSet<Drill> plusSet = plusDrillService.createDrillList(plusCnt, r.nextInt(MAX_DRILL_SIZE), MAX_DRILL_SIZE);
+            val plusSet = plusDrillService.createDrillList(plusCnt, r.nextInt(MAX_DRILL_SIZE), MAX_DRILL_SIZE)
             //全体のリストにマージしていく
-            plusSetAll.addAll(plusSet);
-        } while (plusSetAll.size() < plusCnt);//生成したプラスのリストが指定された数生成できているか確認
-
-        List<Drill> plusDrillList = new ArrayList<>(plusSetAll);
+            plusSetAll.addAll(plusSet)
+        } while (plusSetAll.size < plusCnt) //生成したプラスのリストが指定された数生成できているか確認
+        var plusDrillList: MutableList<Drill?> = ArrayList(plusSetAll)
         // 余分に作成してしまった場合は削除する
-        if (plusSetAll.size() > plusCnt) {
-            plusDrillList = plusSetAll.stream().limit(plusCnt).collect(Collectors.toList());
+        if (plusSetAll.size > plusCnt) {
+            plusDrillList = plusSetAll.stream().limit(plusCnt.toLong()).collect(Collectors.toList())
         }
-        System.out.println("plusList:" + plusDrillList.size());
-        return plusDrillList;
+        println("plusList:" + plusDrillList.size)
+        return plusDrillList
         //--createPlusList() end
     }
 
-    public List<Drill> createMinusList(int minusCnt) {
+    fun createMinusList(minusCnt: Int): List<Drill?> {
         if (minusCnt <= 0) {
-            return Collections.EMPTY_LIST;
+            return mutableListOf()
         }
         //乱数生成
-        Random r = new Random();
-//--createMinusList() start
+        val r = Random()
+        //--createMinusList() start
         //重複しないマイナスリストの生成
-        DrillService minudDrillService = new MinusDrillService();
-        HashSet<Drill> minusSetAll = new HashSet<>();
+        val minudDrillService: DrillService = MinusDrillService()
+        val minusSetAll = HashSet<Drill?>()
         do {
-            HashSet<Drill> minusSet = minudDrillService.createDrillList(minusCnt, r.nextInt(MAX_DRILL_SIZE), MIN_DRILL_SIZE);
-            minusSetAll.addAll(minusSet);
-        } while (minusSetAll.size() < minusCnt);//生成したマイナスのリストが指定された数生成できているか確認
-
-        List<Drill> minusDrillList = new ArrayList<>(minusSetAll);
+            val minusSet = minudDrillService.createDrillList(minusCnt, r.nextInt(MAX_DRILL_SIZE), MIN_DRILL_SIZE)
+            minusSetAll.addAll(minusSet)
+        } while (minusSetAll.size < minusCnt) //生成したマイナスのリストが指定された数生成できているか確認
+        var minusDrillList: List<Drill?> = ArrayList(minusSetAll)
         // 余分に作成してしまった場合は削除する
-        if (minusSetAll.size() > minusCnt) {
-            minusDrillList = minusSetAll.stream().limit(minusCnt).collect(Collectors.toList());
+        if (minusSetAll.size > minusCnt) {
+            minusDrillList = minusSetAll.stream().limit(minusCnt.toLong()).collect(Collectors.toList())
         }
-
-        System.out.println("minusList:" + minusDrillList.size());
-        return minusDrillList;
+        println("minusList:" + minusDrillList.size)
+        return minusDrillList
         //--createMinusList() end
     }
+
+    companion object {
+        const val MAX_DRILL_SIZE = 100
+        const val MIN_DRILL_SIZE = 0
+    }
 }
-
-
