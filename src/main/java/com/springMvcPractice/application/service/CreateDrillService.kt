@@ -18,11 +18,11 @@ class CreateDrillService {
         plusDrillList.addAll(minusDrillList)
 
         //リストをシャッフルする
-        Collections.shuffle(plusDrillList)
+        plusDrillList.shuffle()
         return plusDrillList
     }
 
-    fun createPlusList(plusCnt: Int): MutableList<Drill?> {
+    private fun createPlusList(plusCnt: Int): MutableList<Drill?> {
         if (plusCnt <= 0) {
             return mutableListOf()
         }
@@ -47,7 +47,7 @@ class CreateDrillService {
         //--createPlusList() end
     }
 
-    fun createMinusList(minusCnt: Int): List<Drill?> {
+    private fun createMinusList(minusCnt: Int): List<Drill?> {
         if (minusCnt <= 0) {
             return mutableListOf()
         }
